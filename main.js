@@ -4,8 +4,8 @@ import Preloader from "./scenes/Preloader";
 import Welcome from "./scenes/Welcome";
 
 const game = new Phaser.Game({
-	width: 400,
-	height: 300,
+	width: 500,
+	height: 400,
 	physics: {
 		default: "arcade",
 		arcade: {
@@ -15,6 +15,6 @@ const game = new Phaser.Game({
 	},
 	scene: [Preloader, Welcome, LevelOne],
 	scale: {
-		zoom: 2,
+		zoom: 1.8,
 	},
 });

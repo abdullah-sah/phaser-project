@@ -1,8 +1,9 @@
 import Phaser from "phaser";
 import { drawDebug } from "../utils/debug";
 import { createSprite } from "../utils/createSprite";
+import { createAnim } from "../utils/createAnim";
 
-let cursors, platforms, player;
+let cursors;
 
 class LevelOne extends Phaser.Scene {
 	constructor() {
@@ -11,6 +12,8 @@ class LevelOne extends Phaser.Scene {
 
 	preload() {
 		cursors = this.input.keyboard.createCursorKeys();
+		// In preparation for using utility fn to loop over values and create anims:
+		this.possibleAnims = ["idle", "skipme", "right", "attack", "left"];
 	}
 
 	create() {
@@ -26,48 +29,36 @@ class LevelOne extends Phaser.Scene {
 		wallsLayer.setCollisionByProperty({ colliders: true });
 
 		// uncomment to show collision tiles:
-		drawDebug(wallsLayer, this);
+		// drawDebug(wallsLayer, this);
 
-		// creating the sprite
-		// this.player = this.physics.add.sprite(100, 100, "player");
-		// this.player.setCollideWorldBounds(true);
-		this.player = createSprite(100, 100, "player", this);
+		// creating the sprite using a utility function
+		this.player = createSprite(400, 100, "player", this);
 		this.player.body.setSize(this.player.width * 0.3, this.player.height * 0.3);
 
-		// creating animations:
-		this.anims.create({
-			key: "idle",
-			frames: this.anims.generateFrameNumbers("player", { start: 0, end: 9 }),
-			frameRate: 5,
-			repeat: -1,
-		});
-
-		this.anims.create({
-			key: "right",
-			frames: this.anims.generateFrameNumbers("player", {
-				start: 20,
-				end: 29,
-			}),
-			frameRate: 15,
-			repeat: -1,
-		});
-
-		this.anims.create({
-			key: "left",
-			frames: this.anims.generateFrameNumbers("player", {
-				start: 20,
-				end: 29,
-			}),
-			frameRate: 15,
-			repeat: -1,
-		});
-
-		this.anims.create({
-			key: "attack",
-			frames: this.anims.generateFrameNumbers("player", { start: 30, end: 39 }),
-			frameRate: 10,
-			repeat: 0,
-		});
+		// creating animations for player sprite using utility function:
+		for (let i = 0; i < this.possibleAnims.length * 10; i += 10) {
+			// separate scenario for left (i = 40)
+			// because left animation uses same frames as right animation, just flipped
+			if (i === 40) {
+				createAnim(
+					"player",
+					"left",
+					{ start: 20, end: 29 },
+					10,
+					-1,
+					this.anims
+				);
+			} else {
+				createAnim(
+					"player",
+					this.possibleAnims[i / 10],
+					{ start: i, end: i + 9 },
+					10,
+					-1,
+					this.anims
+				);
+			}
+		}
 
 		// setting colliders:
 		this.physics.add.collider(this.player, wallsLayer);
