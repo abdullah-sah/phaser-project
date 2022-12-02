@@ -13,7 +13,7 @@ const possiblePlayerAnims = [
 	"idle-up",
 ];
 
-const createPlayerAnims = (sprite, anims) => {
+const createPlayerAnims = (spriteKey, anims) => {
 	let animFrame = 0;
 
 	for (let animation of possiblePlayerAnims) {
@@ -37,10 +37,17 @@ const createPlayerAnims = (sprite, anims) => {
 					console.log("you dungoofed my friend.");
 					break;
 			}
-			createAnim(sprite, animation, { start: frame, end: frame }, 0, 0, anims);
+			createAnim(
+				spriteKey,
+				animation,
+				{ start: frame, end: frame },
+				0,
+				0,
+				anims
+			);
 		} else if (animation === "dance") {
 			createAnim(
-				sprite,
+				spriteKey,
 				animation,
 				{ start: animFrame, end: animFrame + 2 },
 				7,
@@ -49,7 +56,7 @@ const createPlayerAnims = (sprite, anims) => {
 			);
 		} else {
 			createAnim(
-				sprite,
+				spriteKey,
 				animation,
 				{ start: animFrame, end: animFrame + 2 },
 				10,
@@ -59,19 +66,6 @@ const createPlayerAnims = (sprite, anims) => {
 		}
 		animFrame += 3;
 	}
-	// for (let i = 0; i < possiblePlayerAnims.length; i += 3) {
-	// 	console.log("PossibleAnims: ", possiblePlayerAnims[i / 10]);
-	// 	console.log("start: ", i);
-	// 	console.log("end: ", i + 2);
-	// 	// createAnim(
-	// 	// 	sprite,
-	// 	// 	possiblePlayerAnims[i / 10],
-	// 	// 	{ start: i / 10, end: (i / 10) + 2 },
-	// 	// 	10,
-	// 	// 	-1,
-	// 	// 	anims
-	// 	// );
-	// }
 };
 
 export { createPlayerAnims };
