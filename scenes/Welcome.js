@@ -7,8 +7,20 @@ class Welcome extends Phaser.Scene {
 
 	create() {
 		this.cursors = this.input.keyboard.createCursorKeys();
-		this.add.text(20, 20, "Welcome to Assassin's Creed Gameboy!");
-		this.add.text(100, 150, "Press the SpaceBar to begin...");
+		this.add.text(20, 20, "Welcome to 'Help Andy Escape!'");
+		this.add.text(
+			20,
+			100,
+			"The goal of the game? Help Andy escape from all the other folk",
+			{ fontSize: 12 }
+		);
+		this.add.text(20, 120, "in gathertown who are demanding his attention!", {
+			fontSize: 12,
+		});
+
+		setTimeout(() => {
+			this.add.text(100, 200, "Press the SpaceBar to begin...");
+		}, 3000);
 	}
 
 	update() {
