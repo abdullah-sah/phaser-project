@@ -80,10 +80,6 @@ class LevelOne extends Phaser.Scene {
 	}
 
 	handlePlayerSpriteCollision(player, sprite) {
-		this.collisions++;
-		if (this.collisions > 4) {
-			this.gameover = true;
-		}
 		const dx = player.x - sprite.x;
 		const dy = player.y - sprite.y;
 
@@ -94,7 +90,8 @@ class LevelOne extends Phaser.Scene {
 		this.hit = 1;
 		setTimeout(() => {
 			player.clearTint();
-		}, 250);
+			this.gameover = true;
+		}, 1000);
 	}
 
 	update() {
