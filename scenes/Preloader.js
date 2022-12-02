@@ -9,7 +9,7 @@ export default class Preloader extends Phaser.Scene {
 		this.load.image("tiles", "../assets/dungeon_tiles.png");
 		this.load.tilemapTiledJSON("dungeon-01", "../assets/dungeon01.json");
 
-		this.load.spritesheet("player", "../assets/rogue.png", {
+		this.load.spritesheet("rogue", "../assets/rogue.png", {
 			frameWidth: 32,
 			frameHeight: 32,
 		});
@@ -21,7 +21,7 @@ export default class Preloader extends Phaser.Scene {
 
 		this.load.spritesheet("andy", "../assets/andyy_gather.png", {
 			frameWidth: 32,
-			frameHeigh: 64,
+			frameHeight: 64,
 		});
 	}
 
